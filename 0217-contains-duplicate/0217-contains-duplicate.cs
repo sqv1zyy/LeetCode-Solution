@@ -1,18 +1,17 @@
-public class Solution {
-    public bool ContainsDuplicate(int[] nums) {
-        var dictonary = new Dictionary<int, int>();
-foreach (int num in nums)
+public class Solution
 {
-    if (!dictonary.ContainsKey(num))
+    public bool ContainsDuplicate(int[] nums)
     {
-        dictonary.Add(num, 1);
-    }
-    else
-    {
-        return true;
-    }
-    
-}
-return false;
+        var results = new HashSet<int>();
+        foreach (int num in nums)
+        {
+            if (!results.Add(num))
+            {
+                return true;
+            }
+
+            
+        }
+        return false;
     }
 }
