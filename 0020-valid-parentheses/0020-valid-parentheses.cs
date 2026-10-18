@@ -2,29 +2,40 @@ public class Solution
 {
     public bool IsValid(string s)
     {
-        var dict = new Dictionary<char, char>
-        {
-            { ')', '(' },
-            { '}', '{' },
-            { ']', '[' }
-        };
         var r = new Stack<char>();
 
         foreach (char c in s)
         {
-            if (dict.ContainsKey(c))
+            switch (c)
             {
-                if (r.Count == 0 || r.Pop() != dict[c])
-                {
-                    return false;
-                }
+                case '(':
+                case '[':
+                case '{':
+                    r.Push(c);
+                    break;
+
+                case ')':
+                    if (r.Count == 0 || r.Pop() != '(')
+                    {
+                        return false;
+                    }
+                    break;
+
+                case ']':
+                    if (r.Count == 0 || r.Pop() != '[')
+                    {
+                        return false;
+                    }
+                    break;
+
+                case '}':
+                    if (r.Count == 0 || r.Pop() != '{')
+                    {
+                        return false;
+                    }
+                    break;
             }
-            else
-            {
-                r.Push(c);
-            }
-            
-        } 
+        }
         return r.Count == 0;
     }
 }
